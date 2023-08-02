@@ -1,6 +1,6 @@
 import decimal
 import os
-
+import requests
 import copy
 import struct
 import urllib.parse as urlparse
@@ -11,6 +11,7 @@ from typing import List
 from bs4 import BeautifulSoup, Tag
 
 from steampy.models import GameOptions
+from steampy.exceptions import ProxyConnectionError
 
 
 def text_between(text: str, begin: str, end: str) -> str:
@@ -163,7 +164,7 @@ def get_description_key(item: dict) -> str:
     return item['classid'] + '_' + item['instanceid']
 
 
-def get_key_value_from_url(url: str, key: str, case_sensitive: bool=True) -> str:
+def get_key_value_from_url(url: str, key: str, case_sensitive: bool = True) -> str:
     params = urlparse.urlparse(url).query
     if case_sensitive:
         return urlparse.parse_qs(params)[key][0]
@@ -182,3 +183,10 @@ class Credentials:
         self.login = login
         self.password = password
         self.api_key = api_key
+
+def ping_proxy(proxies: dict):
+    try:
+        requests.get('https://steamcommunity.com/', proxies=proxies)
+        return True
+    except Exception as e:
+        raise ProxyConnectionError("Proxy not working for steamcommunity.com")
