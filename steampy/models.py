@@ -100,6 +100,12 @@ class SteamUrl:
     API_URL = "https://api.steampowered.com"
     COMMUNITY_URL = "https://steamcommunity.com"
     STORE_URL = 'https://store.steampowered.com'
+    GetPasswordRSAPublicKey_URL = "https://api.steampowered.com/IAuthenticationService/GetPasswordRSAPublicKey/v1/?account_name="
+    BeginAuthSessionViaCredentials_URL = "https://api.steampowered.com/IAuthenticationService/BeginAuthSessionViaCredentials/v1"
+    UpdateAuthSessionWithSteamGuardCode_URL = "https://api.steampowered.com/IAuthenticationService/UpdateAuthSessionWithSteamGuardCode/v1/"
+    PollAuthSessionStatus_URL = "https://api.steampowered.com//IAuthenticationService/PollAuthSessionStatus/v1/"
+    Settoken_community_URL = "https://steamcommunity.com/login/settoken"
+    Settoken_store_URL = "https://store.steampowered.com/login/settoken"
 
 
 class Endpoints:
